@@ -1,30 +1,29 @@
-// Cart Micro-Conversion Logic
-const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
-const cartTotalDisplay = document.getElementById('cart-total');
-
-// Starting cart total based on mockup
-let currentTotal = 150.00;
-
-addToCartButtons.forEach(button => {
-    button.addEventListener('click', (e) => {
-        // Retrieve price from the card data attribute
-        const card = e.target.closest('.product-card');
-        const priceElement = card.querySelector('.sale-price') || card.querySelector('.price');
-        const priceValue = parseFloat(priceElement.getAttribute('data-price'));
-        
-        if (!isNaN(priceValue)) {
-            currentTotal += priceValue;
-            cartTotalDisplay.textContent = `$${currentTotal.toFixed(2)}`;
-        }
-
-        // Button interaction feedback
-        const originalText = e.target.textContent;
-        e.target.textContent = "ADDED ✓";
-        e.target.style.backgroundColor = "#28a745"; 
-        
-        setTimeout(() => {
-            e.target.textContent = originalText;
-            e.target.style.backgroundColor = ""; 
-        }, 1200);
-    });
-});
+'use strict';
+// Demo catalogue: illustrative prices, not real products or payment services.
+const products=[
+{id:'p4',name:'Ulang Kaji Tahun 4 — Asas Mantap',category:'primary',label:'TAHUN 4',desc:'Latihan asas Bahasa Melayu, English, Matematik dan Sains.',price:19,old:29,emoji:'📗',bg:'#e4f2ff',badge:'ASAS'},
+{id:'p5',name:'Pakej Latihan Tahun 5 — Fokus Topik',category:'primary',label:'TAHUN 5',desc:'Set latihan berperingkat untuk pengukuhan topik utama.',price:22,old:32,emoji:'🧮',bg:'#fff1d6',badge:'POPULAR'},
+{id:'p6',name:'Pakej Tahun 6 — Bersedia ke Menengah',category:'primary',label:'TAHUN 6',desc:'Ulang kaji menyeluruh dan latihan kendiri.',price:25,old:35,emoji:'📚',bg:'#f3eaff',badge:'BARU'},
+{id:'f1',name:'Tingkatan 1 — Ulang Kaji Terancang',category:'secondary',label:'TINGKATAN 1',desc:'Latihan mengikut subjek untuk membina kefahaman.',price:25,old:35,emoji:'🎒',bg:'#e8f8ed',badge:'PILIHAN'},
+{id:'f2',name:'Tingkatan 2 — Kuasai Topik',category:'secondary',label:'TINGKATAN 2',desc:'Soalan latihan dan semakan kendiri pelbagai topik.',price:29,old:39,emoji:'📐',bg:'#e6efff',badge:'FOKUS'},
+{id:'f3',name:'Tingkatan 3 — Persediaan UASA',category:'secondary',label:'TINGKATAN 3',desc:'Latih tubi dan ulang kaji topik sekolah menengah.',price:35,old:45,emoji:'📝',bg:'#ffebeb',badge:'POPULAR'},
+{id:'f4',name:'Tingkatan 4 — Asas SPM',category:'upper',label:'TINGKATAN 4',desc:'Pakej latihan topikal untuk asas persediaan SPM.',price:39,old:49,emoji:'📘',bg:'#f1eaff',badge:'SPM'},
+{id:'f5',name:'Tingkatan 5 — Fokus SPM',category:'upper',label:'TINGKATAN 5',desc:'Latihan topikal dan pengukuhan menjelang peperiksaan.',price:49,old:65,emoji:'🎯',bg:'#e7f7f6',badge:'SPM'},
+{id:'m1',name:'MUET Smart Reading Practice',category:'muet',label:'MUET · READING',desc:'Latihan kefahaman teks dan strategi membaca.',price:29,old:39,emoji:'📖',bg:'#e4f0ff',badge:'MUET'},
+{id:'m2',name:'MUET Speaking Confidence Kit',category:'muet',label:'MUET · SPEAKING',desc:'Latihan idea, organisasi respons dan keyakinan bertutur.',price:29,old:39,emoji:'🎤',bg:'#ffe9e1',badge:'MUET'},
+{id:'m3',name:'MUET Listening & Writing Practice',category:'muet',label:'MUET · 2 SKILLS',desc:'Latihan pemahaman audio dan perancangan penulisan.',price:39,old:49,emoji:'🎧',bg:'#e9f9eb',badge:'BUNDLE'},
+{id:'m4',name:'MUET Complete — 4 Skills Bundle',category:'muet',label:'MUET · COMPLETE',desc:'Reading, Writing, Listening dan Speaking dalam satu pakej.',price:79,old:109,emoji:'🎓',bg:'#f1eaff',badge:'BEST VALUE'}
+];
+const $=s=>document.querySelector(s);let currentFilter='all',query='',cart=[];const money=n=>'RM'+n.toFixed(2);
+function renderProducts(){const shown=products.filter(p=>(currentFilter==='all'||p.category===currentFilter)&&[p.name,p.label,p.desc].join(' ').toLowerCase().includes(query));const grid=$('#product-grid');grid.replaceChildren();shown.forEach(p=>{const card=document.createElement('article');card.className='product-card';card.innerHTML=`<div class="product-image" style="background:${p.bg}"><span class="emoji" aria-hidden="true">${p.emoji}</span><span class="sticker">${p.badge}</span></div><div class="product-info"><span class="category">${p.label}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><strong class="price">${money(p.price)}</strong><span class="old-price">${money(p.old)}</span></div><button type="button" data-add="${p.id}">+ Tambah ke Troli</button></div>`;grid.append(card)});$('#empty-state').hidden=shown.length>0;}
+function setFilter(value){currentFilter=value;document.querySelectorAll('.filter').forEach(b=>b.classList.toggle('active',b.dataset.filter===value));renderProducts();$('#packages').scrollIntoView({behavior:'smooth',block:'start'});}
+document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>setFilter(b.dataset.filter)));$('#search').addEventListener('input',e=>{query=e.target.value.trim().toLowerCase();renderProducts()});$('#product-grid').addEventListener('click',e=>{const b=e.target.closest('[data-add]');if(!b)return;const p=products.find(x=>x.id===b.dataset.add);if(!p)return;const entry=cart.find(x=>x.id===p.id);if(entry)entry.qty++;else cart.push({id:p.id,qty:1});updateCart();toast('✓ '+p.name+' ditambah ke troli');});
+function updateCart(){const count=cart.reduce((s,x)=>s+x.qty,0);$('#cart-count').textContent=count;const total=cart.reduce((s,x)=>s+products.find(p=>p.id===x.id).price*x.qty,0);$('#cart-total').textContent=money(total);const list=$('#cart-items');list.replaceChildren();if(!cart.length){const p=document.createElement('p');p.textContent='Troli anda masih kosong. Pilih pakej yang menarik minat anda.';p.style.color='#6f7787';list.append(p)}cart.forEach(x=>{const p=products.find(a=>a.id===x.id);const row=document.createElement('div');row.className='cart-row';const info=document.createElement('div');const name=document.createElement('strong');name.textContent=p.name;const detail=document.createElement('small');detail.textContent=`${x.qty} × ${money(p.price)}`;const remove=document.createElement('button');remove.textContent='Buang satu';remove.addEventListener('click',()=>{x.qty--;if(x.qty<=0)cart=cart.filter(a=>a.id!==x.id);updateCart()});info.append(name,detail,remove);const amount=document.createElement('strong');amount.textContent=money(p.price*x.qty);row.append(info,amount);list.append(row)});}
+let lastFocus=null;function openDialog(id){lastFocus=document.activeElement;$('#overlay').hidden=false;$(id).hidden=false;document.body.style.overflow='hidden';$(id).querySelector('[data-close]').focus();}function closeDialogs(){$('#overlay').hidden=true;$('#cart-drawer').hidden=true;$('#quiz-modal').hidden=true;document.body.style.overflow='';if(lastFocus?.focus)lastFocus.focus();}$('#open-cart').addEventListener('click',()=>openDialog('#cart-drawer'));$('#overlay').addEventListener('click',closeDialogs);document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',closeDialogs));document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDialogs()});$('#checkout').addEventListener('click',()=>toast('Checkout demo sahaja. Tiada pembayaran diproses.'));
+let toastTimer;function toast(message){const t=$('#toast');t.textContent=message;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2600)}
+const quizzes={school:[{q:'Apakah hasil 3/4 + 1/4?',options:['1/2','1','2','3/8'],answer:1,explain:'Penyebut sama: (3+1)/4 = 4/4 = 1.'},{q:'Pilih ayat Bahasa Melayu yang betul.',options:['Dia pergi ke sekolah semalam.','Dia pergi di sekolah semalam.','Dia pergi dari sekolah semalam.','Dia pergi pada sekolah semalam.'],answer:0,explain:'Kata sendi “ke” digunakan untuk menunjukkan arah atau tempat yang dituju.'}],muet:[{q:'Choose the best transition: “The course is challenging; ___, it is rewarding.”',options:['however','because','therefore not','unless'],answer:0,explain:'“However” introduces a contrast between challenging and rewarding.'},{q:'Which is the clearest thesis statement for an essay about online learning?',options:['Online learning is a thing.','I will talk about learning.','Online learning offers flexibility but requires self-discipline.','There are many things.'],answer:2,explain:'A clear thesis presents a specific, arguable main idea.'}]};let quizType='school',quizIndex=0,score=0,answered=false;
+function renderQuiz(){const list=quizzes[quizType],item=list[quizIndex];$('#quiz-question').textContent=`Soalan ${quizIndex+1}/${list.length}: ${item.q}`;const options=$('#quiz-options');options.replaceChildren();$('#quiz-feedback').textContent='';$('#quiz-next').hidden=true;answered=false;item.options.forEach((text,i)=>{const b=document.createElement('button');b.className='quiz-option';b.textContent=`${String.fromCharCode(65+i)}. ${text}`;b.addEventListener('click',()=>answerQuiz(i));options.append(b)});$('#quiz-next').textContent=quizIndex===list.length-1?'Lihat Keputusan →':'Soalan Seterusnya →';}
+function answerQuiz(choice){if(answered)return;answered=true;const item=quizzes[quizType][quizIndex];if(choice===item.answer)score++;$('#quiz-options').querySelectorAll('button').forEach((b,i)=>{b.disabled=true;if(i===item.answer)b.classList.add('correct');else if(i===choice)b.classList.add('wrong')});$('#quiz-feedback').textContent=(choice===item.answer?'✓ Betul! ':'Belum tepat. ')+item.explain;$('#quiz-next').hidden=false;}
+function openQuiz(type='school'){quizType=type;quizIndex=0;score=0;document.querySelectorAll('[data-quiz]').forEach(b=>b.classList.toggle('active',b.dataset.quiz===type));renderQuiz();openDialog('#quiz-modal');}
+$('#open-practice').addEventListener('click',()=>openQuiz('school'));$('#hero-try').addEventListener('click',()=>openQuiz('school'));$('#muet-try').addEventListener('click',()=>openQuiz('muet'));document.querySelectorAll('[data-quiz]').forEach(b=>b.addEventListener('click',()=>{quizType=b.dataset.quiz;quizIndex=0;score=0;document.querySelectorAll('[data-quiz]').forEach(x=>x.classList.toggle('active',x===b));renderQuiz()}));$('#quiz-next').addEventListener('click',()=>{quizIndex++;if(quizIndex<quizzes[quizType].length){renderQuiz();return;}$('#quiz-question').textContent=`Skor anda: ${score}/${quizzes[quizType].length}`;$('#quiz-options').replaceChildren();$('#quiz-feedback').textContent='Ini latihan contoh. Anda boleh cuba lagi untuk meningkatkan kefahaman.';$('#quiz-next').textContent='Cuba Lagi ↻';$('#quiz-next').onclick=()=>{$('#quiz-next').onclick=null;quizIndex=0;score=0;renderQuiz()};$('#quiz-next').hidden=false;});
+renderProducts();updateCart();
