@@ -3,126 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Commerce Store</title>
+    <title>Minimalist Portfolio</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Header: Orientation Layer & Navigation -->
-    <header class="sticky-header">
-        <div class="logo-area">
-            <h2>BrandLogo</h2>
-        </div>
-        
-        <!-- Mega Menu -->
-        <nav class="mega-menu">
-            <ul>
-                <li><a href="#">Categories ▾</a></li>
-                <li><a href="#">New Arrivals</a></li>
-                <li><a href="#">Deals</a></li>
-            </ul>
+    <!-- Header: Orientation Layer -->
+    <header class="site-header">
+        <div class="logo">AINA RAHMAN</div>
+        <nav class="primary-nav">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#services">Services</a>
         </nav>
-
-        <!-- Search Bar with Intent Shortcut -->
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search products, categories...">
-            <button>Search</button>
-        </div>
-
-        <!-- Cart Preview CTA -->
-        <div class="cart-preview">
-            <button id="cartBtn" class="cta-button primary">Cart (<span id="cartCount">0</span>)</button>
-        </div>
+        <a href="#connect" class="cta-button dark">Let's connect ↗</a>
     </header>
 
-    <!-- Breadcrumbs: Spatial Awareness -->
-    <div class="breadcrumbs">
-        <a href="#">Home</a> > <a href="#">Categories</a> > <span>Current Category</span>
-    </div>
-
-    <div class="page-container">
-        
-        <!-- Left Sidebar: Filters and Sorting -->
-        <aside class="sidebar">
-            <h3>Filters & Sorting</h3>
-            <div class="filter-group">
-                <label>Price Range</label>
-                <input type="range" min="0" max="1000">
+    <main>
+        <!-- Hero Section: Emotional Gate -->
+        <section class="hero">
+            <div class="hero-content">
+                <p class="greeting">Hello, I'm Aina.</p>
+                <h1 class="massive-text">AINA<br>RAHMAN</h1>
+                <p class="subtitle">Thoughtful design for everyday ideas.</p>
+                <a href="#work" class="cta-button accent">Explore my work ↗</a>
             </div>
-            <div class="filter-group">
-                <label><input type="checkbox"> In Stock</label>
-                <label><input type="checkbox"> On Sale</label>
-            </div>
-            <div class="filter-group">
-                <label>Sort By:</label>
-                <select>
-                    <option>Recommended</option>
-                    <option>Price: Low to High</option>
-                    <option>Price: High to Low</option>
-                </select>
-            </div>
-        </aside>
-
-        <!-- Product Grid: Scan Language -->
-        <main class="product-grid">
             
-            <!-- Product Card 1 -->
-            <article class="product-card">
-                <div class="card-image-container">
-                    <div class="placeholder-image">Image</div>
-                    <button class="wishlist-btn" onclick="toggleWishlist(this)">♡ Save</button>
+            <div class="hero-image-container">
+                <div class="placeholder-image portrait">
+                    <span>Portrait Image</span>
                 </div>
-                <div class="card-details">
-                    <h3 class="product-title">Premium Wireless Headphones</h3>
-                    <p class="price">$299.00</p>
-                    <!-- Trust Indicators -->
-                    <div class="trust-indicators">
-                        <span class="stars">★★★★★</span>
-                        <span class="reviews">(128 reviews)</span>
+                <p class="image-caption">Graphic designer</p>
+            </div>
+            
+            <div class="hero-statement">
+                <p class="eyebrow">INDEPENDENT DESIGNER</p>
+                <h2 class="bold-statement">DESIGNER.<br>THINKER.<br>CREATOR.</h2>
+                <div class="tags">
+                    <span class="tag">Brand identity</span>
+                    <span class="tag">Digital design</span>
+                    <span class="tag">Web design</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <hr class="minimal-divider">
+
+        <!-- Projects: Boxless Cards for Scan Language -->
+        <section class="projects-section" id="projects">
+            <div class="section-header">
+                <h2>Selected projects</h2>
+                <p>Ideas brought to life through<br>learning and technology.</p>
+            </div>
+            
+            <div class="project-grid">
+                <!-- Card 1 -->
+                <article class="project-card">
+                    <div class="card-image placeholder-image landscape">
+                        <span>Project Image</span>
                     </div>
-                    <button class="cta-button secondary add-to-cart">Add to Cart</button>
-                </div>
-            </article>
-
-            <!-- Product Card 2 -->
-            <article class="product-card">
-                <div class="card-image-container">
-                    <div class="placeholder-image">Image</div>
-                    <button class="wishlist-btn" onclick="toggleWishlist(this)">♡ Save</button>
-                </div>
-                <div class="card-details">
-                    <h3 class="product-title">Ergonomic Office Chair</h3>
-                    <p class="price">$199.50</p>
-                    <div class="trust-indicators">
-                        <span class="stars">★★★★☆</span>
-                        <span class="reviews">(85 reviews)</span>
+                    <h3 class="card-title">Studio Identity</h3>
+                </article>
+                
+                <!-- Card 2 -->
+                <article class="project-card">
+                    <div class="card-image placeholder-image landscape">
+                        <span>Project Image</span>
                     </div>
-                    <button class="cta-button secondary add-to-cart">Add to Cart</button>
-                </div>
-            </article>
+                    <h3 class="card-title">Website Concept</h3>
+                </article>
+            </div>
+        </section>
+    </main>
 
-        </main>
-    </div>
-
-    <!-- Footer: Closure & Trust -->
+    <!-- Footer: Closure -->
     <footer class="site-footer">
-        <div class="footer-columns">
-            <div>
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Shipping & Returns</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Trust & Security</h4>
-                <p>🔒 Secure Checkout</p>
-                <p>✓ 30-Day Money-Back Guarantee</p>
-            </div>
-        </div>
+        <p>Sample portfolio · Fictional profile ↗</p>
     </footer>
 
-    <script src="script.js"></script>
 </body>
 </html>
-
