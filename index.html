@@ -3,84 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minimalist Portfolio</title>
+    <title>e-shop. Electronic Market</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Header: Orientation Layer -->
+    <!-- Utility & Main Header -->
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <span>📍 123 Main Street, USA</span>
+            <span>📞 (888) 123-4567</span>
+        </div>
+        <div class="top-bar-right">
+            <span>USD ▾</span> <span>English ▾</span>
+        </div>
+    </div>
+
     <header class="site-header">
-        <div class="logo">AINA RAHMAN</div>
-        <nav class="primary-nav">
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <a href="#services">Services</a>
-        </nav>
-        <a href="#connect" class="cta-button dark">Let's connect ↗</a>
+        <div class="header-container">
+            <div class="logo">e-shop.</div>
+            
+            <div class="search-container">
+                <input type="text" placeholder="Search Products...">
+                <button class="search-btn">🔍</button>
+            </div>
+
+            <div class="header-actions">
+                <div class="cart-info">
+                    <span class="icon">🛒</span>
+                    <div class="details">
+                        <span class="label">Cart</span>
+                        <span class="amount" id="cart-total">$150.00</span>
+                    </div>
+                </div>
+                <div class="account-info">
+                    <span class="icon">👤</span>
+                    <div class="details">
+                        <span class="label">User</span>
+                        <span class="account-text">Account</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
 
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="all-categories">☰ All Categories</div>
+            <ul class="nav-links">
+                <li><a href="#">Products ▾</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <ul class="nav-promos">
+                <li><a href="#">LIMITED SALE</a></li>
+                <li><a href="#">Best Seller</a></li>
+                <li><a href="#">New Arrival</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <main>
-        <!-- Hero Section: Emotional Gate -->
-        <section class="hero">
+        <!-- Hero Section -->
+        <section class="hero-section">
             <div class="hero-content">
-                <p class="greeting">Hello, I'm Aina.</p>
-                <h1 class="massive-text">AINA<br>RAHMAN</h1>
-                <p class="subtitle">Thoughtful design for everyday ideas.</p>
-                <a href="#work" class="cta-button accent">Explore my work ↗</a>
+                <h1>Your One-Stop<br>Electronic Market</h1>
+                <p>Welcome to e-shop, a place where you can buy everything about electronics. Sale every day!</p>
+                <button class="btn-primary">Shop Now</button>
             </div>
-            
-            <div class="hero-image-container">
-                <div class="placeholder-image portrait">
-                    <span>Portrait Image</span>
+            <div class="hero-images">
+                <div class="placeholder-graphic">Device Mockups</div>
+            </div>
+        </section>
+
+        <!-- Trust Indicators -->
+        <section class="trust-indicators">
+            <div class="trust-item">
+                <span class="icon">🎧</span>
+                <div>
+                    <h4>Responsive</h4>
+                    <p>Customer service 24/7</p>
                 </div>
-                <p class="image-caption">Graphic designer</p>
             </div>
-            
-            <div class="hero-statement">
-                <p class="eyebrow">INDEPENDENT DESIGNER</p>
-                <h2 class="bold-statement">DESIGNER.<br>THINKER.<br>CREATOR.</h2>
-                <div class="tags">
-                    <span class="tag">Brand identity</span>
-                    <span class="tag">Digital design</span>
-                    <span class="tag">Web design</span>
+            <div class="trust-item">
+                <span class="icon">🛡️</span>
+                <div>
+                    <h4>Secure</h4>
+                    <p>Certified marketplace</p>
+                </div>
+            </div>
+            <div class="trust-item">
+                <span class="icon">🚚</span>
+                <div>
+                    <h4>Shipping</h4>
+                    <p>Reliable worldwide</p>
+                </div>
+            </div>
+            <div class="trust-item">
+                <span class="icon">🔄</span>
+                <div>
+                    <h4>Transparent</h4>
+                    <p>Hassle-free return</p>
                 </div>
             </div>
         </section>
 
-        <!-- Divider -->
-        <hr class="minimal-divider">
-
-        <!-- Projects: Boxless Cards for Scan Language -->
-        <section class="projects-section" id="projects">
+        <!-- Product Grid -->
+        <section class="product-section">
             <div class="section-header">
-                <h2>Selected projects</h2>
-                <p>Ideas brought to life through<br>learning and technology.</p>
+                <h2>Featured Products</h2>
+                <a href="#" class="view-all">View All →</a>
             </div>
             
-            <div class="project-grid">
-                <!-- Card 1 -->
-                <article class="project-card">
-                    <div class="card-image placeholder-image landscape">
-                        <span>Project Image</span>
+            <div class="product-carousel">
+                <!-- Standard Product -->
+                <article class="product-card">
+                    <div class="image-wrapper"><div class="placeholder-product">Phone</div></div>
+                    <div class="product-info">
+                        <span class="category">PHONE</span>
+                        <h4 class="title">JPhone 13 High Quality</h4>
+                        <div class="rating">★★★★★ <span class="reviews">(120)</span></div>
+                        <div class="price" data-price="999.00">$999.00</div>
                     </div>
-                    <h3 class="card-title">Studio Identity</h3>
+                </article>
+
+                <!-- Discounted Product (Hover Target) -->
+                <article class="product-card active-target">
+                    <div class="badge discount">50%</div>
+                    <div class="image-wrapper">
+                        <div class="placeholder-product">Laptop</div>
+                        <button class="add-to-cart-btn">ADD TO CART</button>
+                    </div>
+                    <div class="product-info">
+                        <span class="category">LAPTOP</span>
+                        <h4 class="title">S21 Laptop Ultra HD LED</h4>
+                        <div class="rating">★★★★★ <span class="reviews">(90)</span></div>
+                        <div class="price"><span class="sale-price" data-price="1199.00">$1,199.00</span></div>
+                    </div>
                 </article>
                 
-                <!-- Card 2 -->
-                <article class="project-card">
-                    <div class="card-image placeholder-image landscape">
-                        <span>Project Image</span>
+                <!-- Standard Product -->
+                <article class="product-card">
+                    <div class="image-wrapper"><div class="placeholder-product">Camera</div></div>
+                    <div class="product-info">
+                        <span class="category">CAMERA</span>
+                        <h4 class="title">Mini Polaroid Camera</h4>
+                        <div class="rating">★★★★★ <span class="reviews">(70)</span></div>
+                        <div class="price" data-price="79.00">$79.00</div>
                     </div>
-                    <h3 class="card-title">Website Concept</h3>
                 </article>
             </div>
         </section>
     </main>
 
-    <!-- Footer: Closure -->
-    <footer class="site-footer">
-        <p>Sample portfolio · Fictional profile ↗</p>
-    </footer>
-
+    <script src="script.js"></script>
 </body>
 </html>
