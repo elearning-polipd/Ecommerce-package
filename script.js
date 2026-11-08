@@ -1,36 +1,30 @@
-// Cart Logic
-let cartItemCount = 0;
-const cartCountElement = document.getElementById('cartCount');
-const addToCartButtons = document.querySelectorAll('.add-to-cart');
+// Cart Micro-Conversion Logic
+const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+const cartTotalDisplay = document.getElementById('cart-total');
 
-// Attach event listeners to all 'Add to Cart' buttons
+// Starting cart total based on mockup
+let currentTotal = 150.00;
+
 addToCartButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        cartItemCount++;
-        cartCountElement.textContent = cartItemCount;
+    button.addEventListener('click', (e) => {
+        // Retrieve price from the card data attribute
+        const card = e.target.closest('.product-card');
+        const priceElement = card.querySelector('.sale-price') || card.querySelector('.price');
+        const priceValue = parseFloat(priceElement.getAttribute('data-price'));
         
-        // Brief visual feedback on the button
-        const originalText = button.textContent;
-        button.textContent = "Added ✓";
-        button.style.background = "#48bb78";
-        button.style.color = "#ffffff";
+        if (!isNaN(priceValue)) {
+            currentTotal += priceValue;
+            cartTotalDisplay.textContent = `$${currentTotal.toFixed(2)}`;
+        }
+
+        // Button interaction feedback
+        const originalText = e.target.textContent;
+        e.target.textContent = "ADDED ✓";
+        e.target.style.backgroundColor = "#28a745"; 
         
         setTimeout(() => {
-            button.textContent = originalText;
-            button.style.background = "";
-            button.style.color = "";
-        }, 1500);
+            e.target.textContent = originalText;
+            e.target.style.backgroundColor = ""; 
+        }, 1200);
     });
 });
-
-// Wishlist Logic
-function toggleWishlist(buttonElement) {
-    buttonElement.classList.toggle('active');
-    
-    if (buttonElement.classList.contains('active')) {
-        buttonElement.textContent = '♥ Saved';
-    } else {
-        buttonElement.textContent = '♡ Save';
-    }
-}
-
