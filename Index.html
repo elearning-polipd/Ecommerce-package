@@ -1,1 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header: Orientation Layer & Navigation -->
+    <header class="sticky-header">
+        <div class="logo-area">
+            <h2>BrandLogo</h2>
+        </div>
+        
+        <!-- Mega Menu -->
+        <nav class="mega-menu">
+            <ul>
+                <li><a href="#">Categories ▾</a></li>
+                <li><a href="#">New Arrivals</a></li>
+                <li><a href="#">Deals</a></li>
+            </ul>
+        </nav>
+
+        <!-- Search Bar with Intent Shortcut -->
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search products, categories...">
+            <button>Search</button>
+        </div>
+
+        <!-- Cart Preview CTA -->
+        <div class="cart-preview">
+            <button id="cartBtn" class="cta-button primary">Cart (<span id="cartCount">0</span>)</button>
+        </div>
+    </header>
+
+    <!-- Breadcrumbs: Spatial Awareness -->
+    <div class="breadcrumbs">
+        <a href="#">Home</a> > <a href="#">Categories</a> > <span>Current Category</span>
+    </div>
+
+    <div class="page-container">
+        
+        <!-- Left Sidebar: Filters and Sorting -->
+        <aside class="sidebar">
+            <h3>Filters & Sorting</h3>
+            <div class="filter-group">
+                <label>Price Range</label>
+                <input type="range" min="0" max="1000">
+            </div>
+            <div class="filter-group">
+                <label><input type="checkbox"> In Stock</label>
+                <label><input type="checkbox"> On Sale</label>
+            </div>
+            <div class="filter-group">
+                <label>Sort By:</label>
+                <select>
+                    <option>Recommended</option>
+                    <option>Price: Low to High</option>
+                    <option>Price: High to Low</option>
+                </select>
+            </div>
+        </aside>
+
+        <!-- Product Grid: Scan Language -->
+        <main class="product-grid">
+            
+            <!-- Product Card 1 -->
+            <article class="product-card">
+                <div class="card-image-container">
+                    <div class="placeholder-image">Image</div>
+                    <button class="wishlist-btn" onclick="toggleWishlist(this)">♡ Save</button>
+                </div>
+                <div class="card-details">
+                    <h3 class="product-title">Premium Wireless Headphones</h3>
+                    <p class="price">$299.00</p>
+                    <!-- Trust Indicators -->
+                    <div class="trust-indicators">
+                        <span class="stars">★★★★★</span>
+                        <span class="reviews">(128 reviews)</span>
+                    </div>
+                    <button class="cta-button secondary add-to-cart">Add to Cart</button>
+                </div>
+            </article>
+
+            <!-- Product Card 2 -->
+            <article class="product-card">
+                <div class="card-image-container">
+                    <div class="placeholder-image">Image</div>
+                    <button class="wishlist-btn" onclick="toggleWishlist(this)">♡ Save</button>
+                </div>
+                <div class="card-details">
+                    <h3 class="product-title">Ergonomic Office Chair</h3>
+                    <p class="price">$199.50</p>
+                    <div class="trust-indicators">
+                        <span class="stars">★★★★☆</span>
+                        <span class="reviews">(85 reviews)</span>
+                    </div>
+                    <button class="cta-button secondary add-to-cart">Add to Cart</button>
+                </div>
+            </article>
+
+        </main>
+    </div>
+
+    <!-- Footer: Closure & Trust -->
+    <footer class="site-footer">
+        <div class="footer-columns">
+            <div>
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Trust & Security</h4>
+                <p>🔒 Secure Checkout</p>
+                <p>✓ 30-Day Money-Back Guarantee</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
 
